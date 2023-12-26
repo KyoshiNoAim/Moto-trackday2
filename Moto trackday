@@ -1,0 +1,12 @@
+getgenv().money = 500000
+local old 
+old = hookmetamethod(game, "__namecall", function(self, ...)
+    
+    local args = {...}
+    if getnamecallmethod() == "FireServer" then 
+        if  tostring(self) == "ThrottleMoney" then 
+            args[1] = getgenv().money + math.random(-100,100)
+        end
+    end
+    return old(self, unpack(args))
+end)
